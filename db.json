@@ -1,12 +1,6 @@
 {
   "posts": [
     {
-      "userName": "Paul",
-      "title": "sunt ant",
-      "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
-      "id": 1
-    },
-    {
       "userId": 1,
       "id": 2,
       "userName": "John",
@@ -59,6 +53,32 @@
       "title": "nesciunt iursdfdaffasdfsfdsadfdsfsadfasfdafse omnis dolorem tempora et accusantium",
       "body": "consectetur animi nesciunt iure dolore\nenim quia ad\nveniam autem ut quam aut nobis\net est aut quod aut provident voluptas autem voluptas",
       "id": 9
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "cId": 10,
+      "author": "Rohit",
+      "message": "Good News"
+    },
+    {
+      "cId": 9,
+      "author": "Rohan",
+      "message": "Good post",
+      "id": 2
+    },
+    {
+      "cId": 8,
+      "author": "Sumit",
+      "message": "Nice post",
+      "id": 3
+    },
+    {
+      "cId": 10,
+      "author": "Raman",
+      "message": "Yes now its right",
+      "id": 4
     }
   ]
 }

@@ -3,14 +3,15 @@
     <h1>NewsFeed</h1>
     <button @click="togglePanel()">Add Post</button>
     <hr />
-    <h1 v-for="(post) in posts" :key="post.id">
-      <p>{{post.userName}}</p>
-      {{post.title}}<br>
-      {{post.body}}<br>
+    <div v-for="(post) in posts" :key="post.id">
+      <h1>{{post.userName}}</h1>
+      <h2>{{post.title}}</h2>
+      <h3>{{post.body}}</h3>
       <button @click="getPostData(post)">Edit</button> |
-      <button @click="deletePostData(post)">Delete</button>
+      <button @click="toggleDeletePanel(post)">Delete</button> |
+      <button @click="toggleViewPanel(post)">View</button>
       <hr />
-    </h1>
+    </div>
     <div class="modal" v-if="showAddPost">
       <div class="modal-content">
         <span @click="showAddPost = false" class="close">&times;</span>
@@ -20,8 +21,9 @@
           <label>UserName</label><br>
           <input
             type="text"
+            id="userName"
             v-model="postData.userName"
-            required
+            autoComplete="off"
             >
           <br>
           <label>Title</label><br>
@@ -29,7 +31,7 @@
             type="text"
             v-model="postData.title"
             id="title"
-            required
+            autoComplete="off"
           >
           <br>
           <label>Description</label><br>
@@ -37,16 +39,16 @@
             type="text"
             v-model="postData.body"
             id="body"
-            required
+            autoComplete="off"
           >
           <br>
           <button @click.prevent="createPost()" type="submit">Submit</button>
         </form>
       </div>
     </div>
-    <div class="modal" v-if="updateSubmit">
+    <div class="modal" v-if="showEditPost">
       <div class="modal-content">
-        <span @click="closePanel(postData)" class="close">&times;</span>
+        <span @click="editClosePanel(postData)" class="close">&times;</span>
         <h3>Edit the Post</h3>
         <hr />
         <form>
@@ -54,7 +56,7 @@
           <input
             type="text"
             v-model="postData.userName"
-            required
+            id="userName"
             >
           <br>
           <label>Title</label><br>
@@ -62,7 +64,6 @@
             type="text"
             v-model="postData.title"
             id="title"
-            required
           >
           <br>
           <label>Description</label><br>
@@ -70,11 +71,51 @@
             type="text"
             v-model="postData.body"
             id="body"
-            required
           >
           <br>
-          <button @click.prevent="updateData(postData)" type="submit">Update</button>
+          <button @click.prevent="updatePost(postData)" type="submit">Update</button>
         </form>
+      </div>
+    </div>
+    <div class="modal" v-if="showDeletePost">
+      <div class="modal-content">
+        <span @click="showDeletePost = false" class="close">&times;</span>
+        <h3>Delete the post</h3>
+        <hr />
+        <h1>Are you sure you want to delete the post?</h1>
+        <button @click.prevent="deletePost(postData)" type="submit">Yes</button> |
+        <button @click="showDeletePost = false" type="submit">No</button>
+      </div>
+    </div>
+    <div class="modal" v-if="showViewPost">
+      <div class="modal-content">
+        <span @click="viewClosePanel()" class="close">&times;</span>
+        <h3>View Post</h3>
+        <hr />
+        <h1>{{this.postData.userName}}</h1>
+        <h2>{{this.postData.title}}</h2>
+        <h3>{{this.postData.body}}</h3>
+        <div v-for="comment in comments" :key="comment.id">
+          <h2>
+            {{comment.author}}<br>
+            {{comment.message}}
+          </h2>
+        </div>
+        <label>Author</label><br>
+        <input
+          type="text"
+          id="name"
+          v-model="commentData.author"
+          autoComplete="off"
+        ><br>
+        <label>Comment</label><br>
+        <input
+          type="text"
+          id="comment"
+          v-model="commentData.message"
+          autoComplete="off"
+        ><br>
+        <button @click.prevent="submitComment()" type="submit">Comment</button>
       </div>
     </div>
   </div>
@@ -87,44 +128,78 @@ export default {
   data () {
     return {
       posts: [],
+      comments: [],
       postData: {
         id: "",
         userName: "",
         title: "",
         body: ""
       },
+      commentData: {
+        cId: '',
+        author: '',
+        message: ''
+      },
       showAddPost: false,
-      updateSubmit: false
+      showEditPost: false,
+      showDeletePost: false,
+      showViewPost: false
     }
   },
 
   methods: {
+    fetchPosts () {
+      axios.get('http://localhost:3001/posts/')
+        .then(response => {
+          this.posts = response.data.reverse()
+        })
+    },
+    fetchComments () {
+      axios.get(`http://localhost:3001/comments?cId=${this.postData.id}`)
+        .then(response => {
+          this.comments = response.data.reverse()
+        })
+    },
     togglePanel () {
       this.showAddPost = true
     },
-    updatePanel () {
-      this.updateSubmit = true
+    toggleEditPanel () {
+      this.showEditPost = true
     },
-    closePanel (postData) {
+    toggleDeletePanel (post) {
+      this.showDeletePost = true
+      this.postData.id = post.id
+    },
+    toggleViewPanel (post) {
+      this.showViewPost = true
+      this.postData.id = post.id
+      this.commentData.cId = post.id
+      this.fetchComments()
+      this.postData.userName = post.userName
+      this.postData.title = post.title
+      this.postData.body = post.body
+    },
+    editClosePanel (postData) {
       axios.put(`http://localhost:3001/posts/${postData.id}`, {
         userName: this.postData.userName,
         title: this.postData.title,
         body: this.postData.body
       })
         .then(() => {
-            this.fetchPosts()
-            this.postData.id = ''
-            this.postData.userName = ''
-            this.postData.title = ''
-            this.postData.body = ''
-            this.updateSubmit = false
+          this.fetchPosts()
+          this.postData.id = ''
+          this.postData.userName = ''
+          this.postData.title = ''
+          this.postData.body = ''
+          this.showEditPost = false
         })
-      },
-    fetchPosts () {
-      axios.get('http://localhost:3001/posts/')
-        .then(response => {
-          this.posts = response.data.reverse()
-        })
+    },
+    viewClosePanel () {
+      this.showViewPost = false
+      this.postData.id = ''
+      this.postData.userName = ''
+      this.postData.title = ''
+      this.postData.body = ''
     },
     createPost () {
       axios.post('http://localhost:3001/posts/', this.postData)
@@ -138,35 +213,45 @@ export default {
         })
     },
     getPostData (post) {
-      this.updatePanel()
+      this.toggleEditPanel()
       this.postData.userName = post.userName
       this.postData.title = post.title
       this.postData.body = post.body
       this.postData.id = post.id
     },
-    updateData (postData) {
+    updatePost (postData) {
       axios.put(`http://localhost:3001/posts/${postData.id}`, {
         userName: this.postData.userName,
         title: this.postData.title,
         body: this.postData.body
       })
-       .then(() => {
-          this.fetchPosts()
-          this.postData.id = ''
-          this.postData.userName = ''
-          this.postData.title = ''
-          this.postData.body = ''
-          this.updateSubmit = false
-        })
-    },
-    deletePostData (post) {
-      axios.delete(`http://localhost:3001/posts/${post.id}`)
         .then(() => {
           this.fetchPosts()
           this.postData.id = ''
           this.postData.userName = ''
           this.postData.title = ''
           this.postData.body = ''
+          this.showEditPost = false
+        })
+    },
+    deletePost (postData){
+      axios.delete(`http://localhost:3001/posts/${postData.id}`)
+        .then(() => {
+          this.fetchPosts()
+          this.postData.id = ''
+          this.postData.userName = ''
+          this.postData.title = ''
+          this.postData.body = ''
+          this.showDeletePost = false
+        })
+    },
+    submitComment () {
+      axios.post('http://localhost:3001/comments/', this.commentData)
+        .then(() => {
+          this.fetchComments()
+          this.commentData.cId = this.postData.id
+          this.commentData.author = ''
+          this.commentData.message = ''
         })
     }
   },
@@ -186,12 +271,20 @@ export default {
   color: #2c3e50;
 }
 
+.borderStyle {
+  width: 60%;
+  height: 30px;
+  border: 3px solid green;
+  padding: 20px;
+  margin: 10px
+}
+
 .modal-content {
   background-color: #fefefe;
-  margin: 3% auto;
+  margin: 1% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 35%;
+  width: 60%;
 }
 
 .close {
