@@ -1,18 +1,16 @@
 {
   "posts": [
     {
-      "userId": 1,
-      "id": 2,
       "userName": "John",
       "title": "qui est esse",
-      "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
+      "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla",
+      "id": 2
     },
     {
-      "userId": 1,
-      "id": 3,
       "userName": "Sam",
       "title": "ea molestias quasi exercitationem repellat qui ipsa sit aut",
-      "body": "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut"
+      "body": "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut",
+      "id": 3
     },
     {
       "userId": 1,
@@ -53,6 +51,12 @@
       "title": "nesciunt iursdfdaffasdfsfdsadfdsfsadfasfdafse omnis dolorem tempora et accusantium",
       "body": "consectetur animi nesciunt iure dolore\nenim quia ad\nveniam autem ut quam aut nobis\net est aut quod aut provident voluptas autem voluptas",
       "id": 9
+    },
+    {
+      "userName": "Rohit",
+      "title": "Today's News",
+      "body": "Government announced lockdown in delhi from 10 pm to 5 am",
+      "id": 10
     }
   ],
   "comments": [
@@ -63,22 +67,10 @@
       "message": "Good News"
     },
     {
-      "cId": 9,
-      "author": "Rohan",
-      "message": "Good post",
-      "id": 2
-    },
-    {
-      "cId": 8,
-      "author": "Sumit",
-      "message": "Nice post",
-      "id": 3
-    },
-    {
       "cId": 10,
-      "author": "Raman",
-      "message": "Yes now its right",
-      "id": 4
+      "author": "Rohan",
+      "message": "Good News",
+      "id": 2
     }
   ]
 }
