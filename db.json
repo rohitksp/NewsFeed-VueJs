@@ -62,15 +62,27 @@
   "comments": [
     {
       "id": 1,
-      "cId": 10,
+      "postId": 10,
       "author": "Rohit",
       "message": "Good News"
     },
     {
-      "cId": 10,
+      "postId": 10,
       "author": "Rohan",
       "message": "Good News",
       "id": 2
+    },
+    {
+      "postId": 10,
+      "author": "Aman",
+      "message": "Not good news",
+      "id": 3
+    },
+    {
+      "postId": 9,
+      "author": "Komal",
+      "message": "Good line",
+      "id": 4
     }
   ]
 }

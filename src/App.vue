@@ -118,7 +118,7 @@
           <img 
             :src="`https://joeschmoe.io/api/v1/${comment.author}`"
             :style="{margin: '8px 5px 0 0', background: 'lightblue', borderRadius: '0.4rem'}" 
-          width="40px" height="40px" alt={comment.author}/>
+          width="40px" height="40px" :alt="`${comment.author}`"/>
           <div>
             <h3>{{comment.author}}</h3>
             <p>{{comment.message}}</p>
@@ -161,7 +161,7 @@ export default {
         body: ""
       },
       commentData: {
-        cId: '',
+        postId: '',
         author: '',
         message: ''
       },
@@ -174,13 +174,13 @@ export default {
 
   methods: {
     fetchPosts () {
-      axios.get('http://localhost:3001/posts/')
+      axios.get('http://localhost:3002/posts/')
         .then(response => {
           this.posts = response.data.reverse()
         })
     },
     fetchComments () {
-      axios.get(`http://localhost:3001/comments?cId=${this.postData.id}`)
+      axios.get(`http://localhost:3002/comments?postId=${this.postData.id}`)
         .then(response => {
           this.comments = response.data.reverse()
         })
@@ -196,7 +196,7 @@ export default {
       this.postData.id = post.id
     },
     toggleViewPanel (post) {
-      this.commentData.cId = post.id
+      this.commentData.postId = post.id
       this.postData.id = post.id
       this.postData.userName = post.userName
       this.postData.title = post.title
@@ -205,7 +205,7 @@ export default {
       this.showViewPost = true
     },
     editClosePanel (postData) {
-      axios.put(`http://localhost:3001/posts/${postData.id}`, {
+      axios.put(`http://localhost:3002/posts/${postData.id}`, {
         userName: this.postData.userName,
         title: this.postData.title,
         body: this.postData.body
@@ -227,7 +227,7 @@ export default {
       this.postData.body = ''
     },
     createPost () {
-      axios.post('http://localhost:3001/posts/', this.postData)
+      axios.post('http://localhost:3002/posts/', this.postData)
         .then(() => {
           this.fetchPosts()
           this.postData.id = ''
@@ -245,7 +245,7 @@ export default {
       this.postData.id = post.id
     },
     updatePost (postData) {
-      axios.put(`http://localhost:3001/posts/${postData.id}`, {
+      axios.put(`http://localhost:3002/posts/${postData.id}`, {
         userName: this.postData.userName,
         title: this.postData.title,
         body: this.postData.body
@@ -260,7 +260,7 @@ export default {
         })
     },
     deletePost (postData){
-      axios.delete(`http://localhost:3001/posts/${postData.id}`)
+      axios.delete(`http://localhost:3002/posts/${postData.id}`)
         .then(() => {
           this.fetchPosts()
           this.postData.id = ''
@@ -271,10 +271,10 @@ export default {
         })
     },
     submitComment () {
-      axios.post('http://localhost:3001/comments/', this.commentData)
+      axios.post('http://localhost:3002/comments/', this.commentData)
         .then(() => {
           this.fetchComments()
-          this.commentData.cId = this.postData.id
+          this.commentData.postId = this.postData.id
           this.commentData.author = ''
           this.commentData.message = ''
         })
@@ -288,28 +288,44 @@ export default {
 </script>
 
 <style scoped>
+@media only screen and (max-width: 300px) {
+  #app,
+  .input-box,
+  .label,
+  .description-box,
+  .modal-content,
+  .model,
+  .button,
+  .submit-btn,
+  .update-btn,
+  .add-post,
+  .list {
+    width: 100%;
+  }
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin: auto 5%;
+  margin: auto 2%;
   padding: 1%;
   border-radius: 1%;
   background-color: #f6f6f6;
 }
 
 .input-box {
-    width: 95%;
-    padding: 0.3rem 0.6rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: .3rem;
-    margin-bottom: 5px;
+  width: 93%;
+  padding: 0.3rem 0.6rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.3rem;
+  margin-bottom: 5px;
 }
 
 .label {
@@ -318,7 +334,7 @@ export default {
 }
 
 .description-box {
-  width: 95%;
+  width: 93%;
   padding: 0.3rem 0.6rem;
   font-size: 1rem;
   line-height: 1.5;
@@ -326,7 +342,7 @@ export default {
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
-  border-radius: .3rem;
+  border-radius: 0.3rem;
 }
 
 .button {
@@ -356,7 +372,7 @@ export default {
   border-radius: 0.3rem;
 }
 
-.update-btn{
+.update-btn {
   color: white;
   font-size: 0.9rem;
   cursor: pointer;
@@ -374,21 +390,21 @@ export default {
   -moz-transform: scale(1.1);
   -o-transform: scale(1.1);
   background: rgb(226, 149, 5);
-} 
+}
 
 .submit-btn:hover {
   -webkit-transform: scale(1.1);
   -moz-transform: scale(1.1);
   -o-transform: scale(1.1);
   background: #006BF5;
-}   
+}
 
 .button:hover {
   -webkit-transform: scale(1.1);
   -moz-transform: scale(1.1);
   -o-transform: scale(1.1);
   background: #006BF5;
-}   
+}
 
 .add-post {
   color: white;
@@ -408,7 +424,7 @@ export default {
   -moz-transform: scale(1.1);
   -o-transform: scale(1.1);
   background: #0078F5;
-}   
+}
 
 .list {
   margin: 5px;
@@ -419,30 +435,24 @@ export default {
 }
 
 .list:hover {
-  background: #f9f9f9
+  background: #f9f9f9;
 }
 
-h3, h4, p {
+h3,
+h4,
+p {
   margin: 5px 0 5px 0;
-}
-
-.borderStyle {
-  width: 60%;
-  height: 30px;
-  border: 3px solid green;
-  padding: 20px;
-  margin: 10px
 }
 
 .modal-content {
   background-color: #f6f6f6;
-  margin: 1% 20%;
-  padding: 20px;
+  margin: 1% 5%;
+  padding: 10px;
   border: 1px solid #888;
   pointer-events: auto;
   background-clip: padding-box;
-  border: 1px solid rgba(0,0,0,.2);
-  border-radius: .3rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
 }
 
 .close {
@@ -458,9 +468,9 @@ h3, h4, p {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0,0,0,0.6);
-      overflow-x: hidden;
-    overflow-y: auto;
+  background: rgba(0, 0, 0, 0.6);
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .close:hover,

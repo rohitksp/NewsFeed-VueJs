@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "json-server": "json-server --watch db.json --port 3001",
+    "json-server": "json-server --watch db.json --port 3002",
     "start": "concurrently \"npm run serve\" \"npm run json-server\""
   },
   "dependencies": {
