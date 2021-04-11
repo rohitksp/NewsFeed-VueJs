@@ -2,7 +2,7 @@
   <div id="app">
     <h1>
       NewsFeed
-      <button class="add-post" @click="togglePanel()">Add Post</button>
+      <button class="add-post" @click="toggleViewP()">Add Post</button>
     </h1>
     <hr />
     <div class="list" v-for="(post) in posts" :key="post.id">
@@ -178,14 +178,20 @@ export default {
         .then(response => {
           this.posts = response.data.reverse()
         })
+        .catch (() => {
+          console.warn('Something went wrong for getting post')
+        })
     },
     fetchComments () {
       axios.get(`http://localhost:3002/comments?postId=${this.postData.id}`)
         .then(response => {
           this.comments = response.data.reverse()
         })
+        .catch (() => {
+          console.warn('Something went wrong for getting comments')
+        })
     },
-    togglePanel () {
+    toggleViewP () {
       this.showAddPost = true
     },
     toggleEditPanel () {
@@ -287,196 +293,3 @@ export default {
 }
 </script>
 
-<style scoped>
-@media only screen and (max-width: 300px) {
-  #app,
-  .input-box,
-  .label,
-  .description-box,
-  .modal-content,
-  .model,
-  .button,
-  .submit-btn,
-  .update-btn,
-  .add-post,
-  .list {
-    width: 100%;
-  }
-}
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin: auto 2%;
-  padding: 1%;
-  border-radius: 1%;
-  background-color: #f6f6f6;
-}
-
-.input-box {
-  width: 93%;
-  padding: 0.3rem 0.6rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.3rem;
-  margin-bottom: 5px;
-}
-
-.label {
-  font-size: inherit;
-  line-height: 1.5;
-}
-
-.description-box {
-  width: 93%;
-  padding: 0.3rem 0.6rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.3rem;
-}
-
-.button {
-  color: white;
-  font-size: 0.9rem;
-  float: right;
-  cursor: pointer;
-  border: none;
-  background: blue;
-  padding: 10px 15px;
-  font-weight: 700;
-  line-height: 1em;
-  margin-right: 5px;
-  border-radius: 0.4rem;
-}
-
-.submit-btn {
-  color: white;
-  font-size: 0.9rem;
-  cursor: pointer;
-  border: none;
-  background: blue;
-  padding: 10px 15px;
-  font-weight: 700;
-  line-height: 1.3em;
-  margin: 10px 7px 0 0;
-  border-radius: 0.3rem;
-}
-
-.update-btn {
-  color: white;
-  font-size: 0.9rem;
-  cursor: pointer;
-  border: none;
-  background: rgb(212, 139, 3);
-  padding: 10px 15px;
-  font-weight: 700;
-  line-height: 1.3em;
-  margin: 10px 0 0 0;
-  border-radius: 0.3rem;
-}
-
-.update-btn:hover {
-  -webkit-transform: scale(1.1);
-  -moz-transform: scale(1.1);
-  -o-transform: scale(1.1);
-  background: rgb(226, 149, 5);
-}
-
-.submit-btn:hover {
-  -webkit-transform: scale(1.1);
-  -moz-transform: scale(1.1);
-  -o-transform: scale(1.1);
-  background: #006BF5;
-}
-
-.button:hover {
-  -webkit-transform: scale(1.1);
-  -moz-transform: scale(1.1);
-  -o-transform: scale(1.1);
-  background: #006BF5;
-}
-
-.add-post {
-  color: white;
-  font-size: 1rem;
-  float: right;
-  cursor: pointer;
-  border: none;
-  background: blue;
-  padding: 13px 20px;
-  font-weight: 800;
-  line-height: 1em;
-  border-radius: 0.4rem;
-}
-
-.add-post:hover {
-  -webkit-transform: scale(1.1);
-  -moz-transform: scale(1.1);
-  -o-transform: scale(1.1);
-  background: #0078F5;
-}
-
-.list {
-  margin: 5px;
-  background: white;
-  padding: 10px;
-  border-radius: 15px;
-  pointer-events: auto;
-}
-
-.list:hover {
-  background: #f9f9f9;
-}
-
-h3,
-h4,
-p {
-  margin: 5px 0 5px 0;
-}
-
-.modal-content {
-  background-color: #f6f6f6;
-  margin: 1% 5%;
-  padding: 10px;
-  border: 1px solid #888;
-  pointer-events: auto;
-  background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 0.3rem;
-}
-
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.modal {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.6);
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-</style>
