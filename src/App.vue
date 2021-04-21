@@ -1,91 +1,31 @@
 <template lang="html">
   <div id="app">
+    <PostCreate 
+      :showAddPost="showAddPost"
+      :postData="postData"
+      :fetchPosts="fetchPosts"
+    />
     <h1>
       NewsFeed
-      <button class="add-post" @click="toggleViewP()">Add Post</button>
     </h1>
     <hr />
     <div class="list" v-for="(post) in posts" :key="post.id">
       <h3>
         {{post.userName}}
+        <PostEdit 
+          :showEditPost="showEditPost"
+          :postData="postData"
+          :fetchPosts="fetchPosts"
+          :post="post"
+        />
         <button class="button" :style="{background: '#dc3545'}" @click="toggleDeletePanel(post)">Delete</button>
-        <button class="button" :style="{background: 'rgb(9 168 199)'}" @click="getPostData(post)">Edit</button>
         <button class="button" :style="{background: '#198754'}" @click="toggleViewPanel(post)">View</button>
       </h3>
       <h4>{{post.title}}</h4>
       <p>{{post.body}}</p>
     </div>
-    <div class="modal" v-if="showAddPost">
-      <div class="modal-content">
-        <span @click="showAddPost = false" class="close">&times;</span>
-        <h3>Add New Post</h3>
-        <hr />
-        <form>
-          <label class="label">UserName:</label><br>
-          <input
-            type="text"
-            id="userName"
-            v-model="postData.userName"
-            autoComplete="off"
-            class="input-box"
-            >
-          <br>
-          <label class="label">Title:</label><br>
-          <input
-            type="text"
-            v-model="postData.title"
-            id="title"
-            autoComplete="off"
-            class="input-box"
-          >
-          <br>
-          <label class="label">Description:</label><br>
-          <input
-            type="text"
-            v-model="postData.body"
-            id="body"
-            autoComplete="off"
-            class="description-box"
-          >
-          <br>
-          <button class="submit-btn" @click.prevent="createPost()" type="submit">Add Post</button>
-        </form>
-      </div>
-    </div>
-    <div class="modal" v-if="showEditPost">
-      <div class="modal-content">
-        <span @click="editClosePanel(postData)" class="close">&times;</span>
-        <h3>Edit the Post</h3>
-        <hr />
-        <form>
-          <label class="label" >UserName</label><br>
-          <input
-            type="text"
-            v-model="postData.userName"
-            id="userName"
-            class="input-box"
-            >
-          <br>
-          <label class="label" >Title</label><br>
-          <input
-            type="text"
-            v-model="postData.title"
-            id="title"
-            class="input-box"
-          >
-          <br>
-          <label class="label" >Description</label><br>
-          <input
-            type="text"
-            v-model="postData.body"
-            id="body"
-            class="input-box"
-          >
-          <br>
-          <button class="update-btn" @click.prevent="updatePost(postData)" type="submit">Update</button>
-        </form>
-      </div>
-    </div>
+    
+    
     <div class="modal" v-if="showDeletePost">
       <div class="modal-content">
         <span @click="showDeletePost = false" class="close">&times;</span>
@@ -148,8 +88,14 @@
 
 <script>
 import axios from 'axios'
+import PostEdit from "./components/PostEdit"
+import PostCreate from "./components/PostCreate"
 
 export default {
+  components: {
+    PostEdit,
+    PostCreate
+  },
   data () {
     return {
       posts: [],
@@ -191,12 +137,6 @@ export default {
           console.warn('Something went wrong for getting comments')
         })
     },
-    toggleViewP () {
-      this.showAddPost = true
-    },
-    toggleEditPanel () {
-      this.showEditPost = true
-    },
     toggleDeletePanel (post) {
       this.showDeletePost = true
       this.postData.id = post.id
@@ -210,60 +150,12 @@ export default {
       this.fetchComments()
       this.showViewPost = true
     },
-    editClosePanel (postData) {
-      axios.put(`http://localhost:3002/posts/${postData.id}`, {
-        userName: this.postData.userName,
-        title: this.postData.title,
-        body: this.postData.body
-      })
-        .then(() => {
-          this.fetchPosts()
-          this.postData.id = ''
-          this.postData.userName = ''
-          this.postData.title = ''
-          this.postData.body = ''
-          this.showEditPost = false
-        })
-    },
     viewClosePanel () {
       this.showViewPost = false
       this.postData.id = ''
       this.postData.userName = ''
       this.postData.title = ''
       this.postData.body = ''
-    },
-    createPost () {
-      axios.post('http://localhost:3002/posts/', this.postData)
-        .then(() => {
-          this.fetchPosts()
-          this.postData.id = ''
-          this.postData.userName = ''
-          this.postData.title = ''
-          this.postData.body = ''
-          this.showAddPost = false
-        })
-    },
-    getPostData (post) {
-      this.toggleEditPanel()
-      this.postData.userName = post.userName
-      this.postData.title = post.title
-      this.postData.body = post.body
-      this.postData.id = post.id
-    },
-    updatePost (postData) {
-      axios.put(`http://localhost:3002/posts/${postData.id}`, {
-        userName: this.postData.userName,
-        title: this.postData.title,
-        body: this.postData.body
-      })
-        .then(() => {
-          this.fetchPosts()
-          this.postData.id = ''
-          this.postData.userName = ''
-          this.postData.title = ''
-          this.postData.body = ''
-          this.showEditPost = false
-        })
     },
     deletePost (postData){
       axios.delete(`http://localhost:3002/posts/${postData.id}`)
