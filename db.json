@@ -53,8 +53,8 @@
       "id": 9
     },
     {
-      "userName": "Hemant",
-      "title": "Today's News.",
+      "userName": "Rohit",
+      "title": "Today's News",
       "body": "Government announced lockdown in delhi from 10 pm to 5 am.",
       "id": 10
     }
@@ -83,6 +83,18 @@
       "author": "Komal",
       "message": "Good line",
       "id": 4
+    },
+    {
+      "postId": 9,
+      "author": "Amrish",
+      "message": "Nice",
+      "id": 5
+    },
+    {
+      "postId": 8,
+      "author": "Robin",
+      "message": "Nice Line",
+      "id": 6
     }
   ]
 }
