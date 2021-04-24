@@ -13,28 +13,24 @@
       "id": 3
     },
     {
-      "userId": 1,
       "id": 4,
       "userName": "Aman",
       "title": "eum et est occaecati",
       "body": "ullam et saepe reiciendis voluptatem adipisci\nsit amet autem assumenda provident rerum culpa\nquis hic commodi nesciunt rem tenetur doloremque ipsam iure\nquis sunt voluptatem rerum illo velit"
     },
     {
-      "userId": 1,
       "id": 5,
       "userName": "Vijay",
       "title": "nesciunt quas odio",
       "body": "repudiandae veniam quaerat sunt sed\nalias aut fugiat sit autem sed est\nvoluptatem omnis possimus esse voluptatibus quis\nest aut tenetur dolor neque"
     },
     {
-      "userId": 1,
       "id": 6,
       "userName": "Rohan",
       "title": "dolorem eum magni eos aperiam quia",
       "body": "ut aspernatur corporis harum nihil quis provident sequi\nmollitia nobis aliquid molestiae\nperspiciatis et ea nemo ab reprehenderit accusantium quas\nvoluptate dolores velit et doloremque molestiae"
     },
     {
-      "userId": 1,
       "id": 7,
       "userName": "Sen",
       "title": "magnam facilis autem",
@@ -54,7 +50,7 @@
     },
     {
       "userName": "Rohit",
-      "title": "Today's News",
+      "title": "Today's News.",
       "body": "Government announced lockdown in delhi from 10 pm to 5 am.",
       "id": 10
     }
@@ -62,38 +58,26 @@
   "comments": [
     {
       "id": 1,
-      "postId": 10,
+      "postId": "10",
       "author": "Rohit",
-      "message": "Good News"
+      "message": "Bad news"
     },
     {
-      "postId": 10,
-      "author": "Rohan",
-      "message": "Good News",
-      "id": 2
-    },
-    {
-      "postId": 10,
+      "postId": "10",
       "author": "Aman",
       "message": "Not good news",
       "id": 3
     },
     {
-      "postId": 9,
+      "postId": "9",
       "author": "Komal",
       "message": "Good line",
       "id": 4
     },
     {
-      "postId": 9,
-      "author": "Amrish",
-      "message": "Nice",
-      "id": 5
-    },
-    {
-      "postId": 8,
-      "author": "Robin",
-      "message": "Nice Line",
+      "postId": "8",
+      "author": "Ashu",
+      "message": "Nice Post",
       "id": 6
     }
   ]

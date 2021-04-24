@@ -1,79 +1,8 @@
-<template lang="html">
+<template>
   <div id="app">
-    <Header 
-      :postData="postData"
-      :fetchPosts="fetchPosts"
-    />
-    <div class="list" v-for="(post) in posts" :key="post.id">
-      <PostDelete 
-        :postData="postData"
-        :fetchPosts="fetchPosts"
-        :post="post"
-      />
-      <PostEdit
-        :postData="postData"
-        :fetchPosts="fetchPosts"
-        :post="post"
-      />
-      <PostView 
-        :post="post"
-        :postData="postData"
-        :fetchPosts="fetchPosts"
-      />
-      <h3>
-        {{post.userName}}
-      </h3>
-      <h4>{{post.title}}</h4>
-      <p>{{post.body}}</p>
-    </div>    
+    <router-view />
   </div>
 </template>
-
-<script>
-import axios from 'axios'
-import Header from "./components/Header"
-import PostCreate from "./components/PostCreate"
-import PostView from "./components/PostView"
-import PostEdit from "./components/PostEdit"
-import PostDelete from "./components/PostDelete"
-
-export default {
-  components: {
-    Header,
-    PostCreate,
-    PostView,
-    PostEdit,
-    PostDelete
-  },
-  data () {
-    return {
-      posts: [],
-      postData: {
-        id: "",
-        userName: "",
-        title: "",
-        body: ""
-      }
-    }
-  },
-
-  methods: {
-    fetchPosts () {
-      axios.get('http://localhost:3002/posts/')
-        .then(response => {
-          this.posts = response.data.reverse()
-        })
-        .catch (() => {
-          console.warn('Something went wrong for getting post')
-        })
-    }
-  },
-
-  mounted: function () {
-    this.fetchPosts()
-  }
-}
-</script>
 
 <style scoped>
 #app {
@@ -87,4 +16,3 @@ export default {
   background-color: #f6f6f6;
 }
 </style>
-
