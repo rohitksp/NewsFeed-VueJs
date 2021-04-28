@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import PostList from '../components/PostList.vue'
-import PostCreate from '../components/PostCreate.vue'
-import PostEdit from '../components/PostEdit.vue'
-import PostDelete from '../components/PostDelete.vue'
-import PostView from '../components/PostView.vue'
+import PostList from '../components/posts/PostList.vue'
+import PostCreate from '../components/posts/PostCreate.vue'
+import PostEdit from '../components/posts/PostEdit.vue'
+import PostDelete from '../components/posts/PostDelete.vue'
+import PostView from '../components/posts/PostView.vue'
+import NotFound from '../components/NotFound.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [
     component: PostList
   },
   {
+    path: '*',
+    name: 'not-found',
+    component: NotFound
+  },
+  {
     path: '/postcreate',
     name: 'postcreate',
     component: PostCreate
@@ -22,23 +28,25 @@ const routes = [
   {
     path: '/postedit/:id',
     name: 'postedit',
+    props: true,
     component: PostEdit
   },
   {
     path: '/postdelete/:id',
     name: 'postdelete',
+    props: true,
     component: PostDelete
   },
   {
     path: '/postview/:id',
     name: 'postview',
+    props: true,
     component: PostView
   }
 ]
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
   routes
 })
 
