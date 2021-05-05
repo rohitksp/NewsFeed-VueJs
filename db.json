@@ -27,7 +27,7 @@
     {
       "id": 6,
       "userName": "Rohan",
-      "title": "dolorem eum magni eos aperiam quia",
+      "title": "dolorem eum magni eos aperiam quiasdfafasd",
       "body": "ut aspernatur corporis harum nihil quis provident sequi\nmollitia nobis aliquid molestiae\nperspiciatis et ea nemo ab reprehenderit accusantium quas\nvoluptate dolores velit et doloremque molestiae"
     },
     {
@@ -51,7 +51,7 @@
     {
       "userName": "Rohit",
       "title": "Today's News.",
-      "body": "Government announced lockdown in delhi from 10 pm to 5 am.",
+      "body": "Government announced lockdown in delhi from 10 pm to 5 am",
       "id": 10
     }
   ],
@@ -61,12 +61,6 @@
       "postId": "10",
       "author": "Rohit",
       "message": "Bad news"
-    },
-    {
-      "postId": "10",
-      "author": "Aman",
-      "message": "Not good news",
-      "id": 3
     },
     {
       "postId": "9",
@@ -79,6 +73,12 @@
       "author": "Ashu",
       "message": "Nice Post",
       "id": 6
+    },
+    {
+      "postId": "10",
+      "author": "Rohan",
+      "message": "Very bad news",
+      "id": 9
     }
   ]
 }

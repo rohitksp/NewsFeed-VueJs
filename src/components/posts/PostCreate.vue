@@ -7,6 +7,7 @@
       <input
         type="text"
         id="user-name"
+        placeholder="User Name"
         v-model="postData.userName"
         autocomplete="off"
         class="input-box"
@@ -17,6 +18,7 @@
       <input
         type="text"
         id="title"
+        placeholder="Title"
         v-model="postData.title"
         autocomplete="off"
         class="input-box"
@@ -27,57 +29,50 @@
       <input
         type="text"
         id="description"
+        placeholder="Description"
         v-model="postData.body"
         autocomplete="off"
         class="input-box"
         required
       />
       <br />
-      <button class="submit-btn" type="submit">Add Post</button> 
+      <button class="submit-btn" type="submit">Add Post</button>
       <HomeButton />
-      <h3 v-if="loadingData">Loading...</h3>
     </form>
   </div>
 </template>
 
 <script>
-  import axios from "axios";
-  import HomeButton from '../HomeButton.vue'
+import HomeButton from "../HomeButton.vue";
+import { mapActions } from "vuex";
 
-  export default {
-    name: "PostCreate",
-    components: {
-      HomeButton
-    },
+export default {
+  name: "PostCreate",
+  components: {
+    HomeButton,
+  },
 
-    data: function () {
-      return {
-        postData: {
-          id: "",
-          userName: "",
-          title: "",
-          body: ""
-        },
-        loadingData: false
-      };
+  data: function () {
+    return {
+      postData: {
+        userName: "",
+        title: "",
+        body: "",
+      },
+    };
+  },
+  methods: {
+    ...mapActions(["addPost", "getPosts"]),
+    createPost() {
+      this.addPost({
+        body: this.postData.body,
+        title: this.postData.title,
+        userName: this.postData.userName,
+      });
+      this.getPosts();
+      this.postData = "";
+      this.$router.push("/");
     },
-    methods: {
-      createPost() {
-        this.loadingData = true;
-        axios
-          .post("http://localhost:3002/posts/", this.postData)
-          .then((res) => {
-            if (res.status === 201) {
-              this.loadingData = false;
-              this.postData = ""
-              this.$router.push("/");
-            }
-          })
-          .catch((error) => {
-            window.alert(error);
-            this.loadingData = false;
-          });
-      }
-    }
-  };
+  },
+};
 </script>

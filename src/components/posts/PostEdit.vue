@@ -16,6 +16,7 @@
       <label for="title" class="label">Title</label><br />
       <input
         type="text"
+        placeholder="Edit the title"
         v-model="postData.title"
         id="title"
         class="input-box"
@@ -26,6 +27,7 @@
       <label for="description" class="label">Description</label><br />
       <input
         type="text"
+        placeholder="Edit the description"
         v-model="postData.body"
         id="description"
         class="input-box"
@@ -36,67 +38,35 @@
       <button class="update-btn" type="submit">Update</button>
       <HomeButton />
     </form>
-    <h3 v-if="loadingData">Loading...</h3>
   </div>
 </template>
 
 <script>
-  import axios from "axios";
-  import HomeButton from '../HomeButton'
+import HomeButton from "../HomeButton";
+import { mapActions, mapState } from "vuex";
 
-  export default {
-    name: "PostEdit",
-    props: ['id'],
-    components: {
-      HomeButton
-    },
+export default {
+  name: "PostEdit",
+  props: ["id"],
+  components: {
+    HomeButton,
+  },
 
-    data: function () {
-      return {
-        postData: {
-          id: "",
-          userName: "",
-          title: "",
-          body: ""
-        },
-        loadingData: false
-      };
+  methods: {
+    ...mapActions(["editPost", "getPosts"]),
+
+    updatePost() {
+      this.editPost(this.postData);
+      this.getPosts();
+      this.$router.push("/");
     },
-    methods: {
-      getPostData() {
-        this.loadingData = true;
-        axios
-          .get(`http://localhost:3002/posts/${this.id}`)
-          .then((response) => {
-            if (response.status === 200) {
-              this.loadingData = false;
-              this.postData = response.data;
-            }
-          })
-          .catch((error) => {
-            window.alert(error);
-            this.loadingData = false;
-          });
-      },
-      updatePost() {
-        this.loadingData = true;
-        axios
-          .put(`http://localhost:3002/posts/${this.id}`, this.postData)
-          .then((response) => {
-            if (response.status === 200) {
-              this.loadingData = true;
-              this.postData = "";
-              this.$router.push("/");
-            }
-          })
-          .catch((error) => {
-            this.loadingData = false;
-            window.alert(error);
-          });
-      }
+  },
+  computed: {
+    ...mapState(["posts"]),
+
+    postData() {
+      return this.posts.find((post) => post.id == this.id);
     },
-    mounted() {
-      this.getPostData();
-    }
-  };
+  },
+};
 </script>

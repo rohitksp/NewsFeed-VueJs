@@ -6,8 +6,8 @@
     <h1>
       NewsFeed
     </h1>
-    <h3 v-if="loadingData">Loading...</h3>
-    <div class="list" v-for="post in posts" :key="post.id">
+    <h3 v-if="loading_status">Loading...</h3>
+    <div class="list" v-for="(post, index) in posts_data" :key="index">
       <router-link
         :to="`/postdelete/${post.id}`"
         tag="button"
@@ -34,36 +34,19 @@
 </template>
 
 <script>
-  import axios from "axios";
+import { mapActions, mapGetters } from "vuex";
 
-  export default {
-    data: function () {
-      return {
-        posts: [],
-        loadingData: false
-      };
-    },
+export default {
+  methods: {
+    ...mapActions(["getPosts"]),
+  },
 
-    methods: {
-      fetchPosts() {
-        this.loadingData = true;
-        axios
-          .get("http://localhost:3002/posts/")
-          .then((response) => {
-            if (response.status === 200) {
-              this.loadingData = false;
-              this.posts = response.data.reverse();
-            }
-          })
-          .catch((error) => {
-            window.alert(error);
-            this.loadingData = false;
-          });
-      }
-    },
+  computed: {
+    ...mapGetters(["posts_data", "loading_status"]),
+  },
 
-    mounted: function () {
-      this.fetchPosts();
-    }
-  };
+  mounted: function () {
+    this.getPosts();
+  },
+};
 </script>

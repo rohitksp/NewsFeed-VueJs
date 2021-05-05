@@ -3576,6 +3576,11 @@
     "is-date-object" "^1.0.1"
     "is-symbol" "^1.0.2"
 
+"es6-promise@^4.2.8":
+  "integrity" "sha512-HJDGx5daxeIvxdBxvG2cb9g4tEvwIk3i8+nhX0yGrYmZUzbkdg8QbDevheDB8gd0//uPj4c1EQua8Q+MViT0/w=="
+  "resolved" "https://registry.npmjs.org/es6-promise/-/es6-promise-4.2.8.tgz"
+  "version" "4.2.8"
+
 "escalade@^3.1.1":
   "integrity" "sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw=="
   "resolved" "https://registry.npmjs.org/escalade/-/escalade-3.1.1.tgz"
@@ -8317,6 +8322,11 @@
     "unquote" "~1.1.1"
     "util.promisify" "~1.0.0"
 
+"sweetalert2@^10.16.6":
+  "integrity" "sha512-089SRfG8NopJAVG9euo+kKHWRaCK6V5WY6v1kySYL07SDF/FEEW1Fu+LqkHqvQ0h3KnQ8AE2Z81mpvhMOlx/Vw=="
+  "resolved" "https://registry.npmjs.org/sweetalert2/-/sweetalert2-10.16.6.tgz"
+  "version" "10.16.6"
+
 "table@^5.2.3":
   "integrity" "sha512-wmEc8m4fjnob4gt5riFRtTu/6+4rSe12TpAELNSqHMfF3IqnA+CH37USM6/YR3qRZv7e56kAEAtd6nKZaxe0Ug=="
   "resolved" "https://registry.npmjs.org/table/-/table-5.4.6.tgz"
@@ -8921,10 +8931,15 @@
   "resolved" "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"
 
-"vue@^2 || ^3.0.0-0", "vue@^2.6.11":
+"vue@^2 || ^3.0.0-0", "vue@^2.0.0", "vue@^2.6.11":
   "integrity" "sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-2.6.12.tgz"
   "version" "2.6.12"
+
+"vuex@^3.6.2":
+  "integrity" "sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw=="
+  "resolved" "https://registry.npmjs.org/vuex/-/vuex-3.6.2.tgz"
+  "version" "3.6.2"
 
 "watchpack-chokidar2@^2.0.1":
   "integrity" "sha512-nCFfBIPKr5Sh61s4LPpy1Wtfi0HE8isJ3d2Yb5/Ppw2P2B/3eVSEBjKfN0fmHJSK14+31KwMKmcrzs2GM4P0Ww=="
