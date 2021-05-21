@@ -1,14 +1,15 @@
 <template>
   <div>
-    <h3>Delete the post</h3>
-    <hr />
-    <p :style="{ margin: '20px 0 10px 0' }">
-      Are you sure you want to delete the post?
-    </p>
-    <button class="delete-btn" @click.prevent="deletePostData()" type="submit">
-      Yes
-    </button>
-    <router-link to="/" class="submit-btn" tag="button">No</router-link>
+    <div class="header">Delete The Post</div>
+    <div class="bg-white rounded-lg p-2 mt-2">
+      <div class="label my-2">
+        Are you sure you want to delete the post?
+      </div>
+      <button class="danger-btn" @click.prevent="deletePostData()">
+        Yes
+      </button>
+      <router-link to="/" class="primary-btn ml-1">No</router-link>
+    </div>
   </div>
 </template>
 

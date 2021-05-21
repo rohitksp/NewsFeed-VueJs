@@ -1,27 +1,26 @@
 <template>
   <div>
-    <h3>View Post</h3>
-    <hr />
-    <div class="list">
-      <h3>{{ this.postData.userName }}</h3>
-      <h4>{{ this.postData.title }}</h4>
-      <p>{{ this.postData.body }}</p>
+    <div class="header">View Post</div>
+    <div class="bg-white rounded-lg hover:bg-gray-300 p-2 my-2">
+      <div class="font-bold text-lg">{{ this.postData.userName }}</div>
+      <div class="font-semibold text-base">{{ this.postData.title }}</div>
+      <div class="font-medium">{{ this.postData.body }}</div>
     </div>
     <div
+      class="bg-white flex rounded-lg p-2 my-2"
       v-for="(comment, index) in commentData"
       :key="index"
-      :style="styleObject"
     >
       <img
         :src="avatarUrl(comment)"
-        :style="avatarStyle"
-        width="40px"
-        height="40px"
+        width="50px"
+        height="50px"
         :alt="comment.author"
+        class="bg-blue-300 rounded-full mr-1"
       />
       <div>
-        <h3>{{ comment.author }}</h3>
-        <p>{{ comment.message }}</p>
+        <div class="font-bold text-lg">{{ comment.author }}</div>
+        <div class="font-normal">{{ comment.message }}</div>
       </div>
     </div>
     <form @submit.prevent="submitComment()">
@@ -45,7 +44,7 @@
         class="input-box"
         required
       /><br />
-      <button class="submit-btn" type="submit">Comment</button>
+      <button class="primary-btn mt-2" type="submit">Comment</button>
       <HomeButton />
     </form>
     <h3 v-if="loading_status">Loading...</h3>
@@ -63,19 +62,8 @@ export default {
     HomeButton,
   },
 
-  data: function () {
+  data: function() {
     return {
-      avatarStyle: {
-        margin: "8px 5px 0 0",
-        background: "lightblue",
-        borderRadius: "0.4rem",
-      },
-      styleObject: {
-        padding: "5px 0 5px 7px",
-        display: "flex",
-        background: "white",
-        margin: "5px",
-      },
       postComment: {
         postId: this.id,
         author: "",

@@ -1,11 +1,5 @@
 <template>
-  <router-link
-    to="/"
-    tag="button"
-    class="submit-btn"
-    :style="{ background: '#dc3545' }"
-    >Home
-  </router-link>
+  <router-link to="/" class="danger-btn ml-1">Home</router-link>
 </template>
 
 <script>

@@ -1,34 +1,38 @@
 <template lang="html">
   <div>
-    <router-link to="/postcreate" class="add-post" tag="button"
-      >Add Post</router-link
+    <div class="bg-white m-2 rounded-lg py-7 px-2">
+      <router-link to="/postcreate" class="float-right primary-btn"
+        >Add Post</router-link
+      >
+      <div class="text-2xl font-bold">
+        NewsFeed
+      </div>
+      <div class="font-medium" v-if="loading_status">Loading...</div>
+    </div>
+    <div
+      class="m-2 bg-white rounded-lg hover:bg-gray-300 p-2"
+      v-for="(post, index) in posts_data"
+      :key="index"
     >
-    <h1>
-      NewsFeed
-    </h1>
-    <h3 v-if="loading_status">Loading...</h3>
-    <div class="list" v-for="(post, index) in posts_data" :key="index">
       <router-link
         :to="`/postdelete/${post.id}`"
-        tag="button"
-        class="button"
-        :style="{background: '#dc3545'}"
+        class="float-right danger-btn"
         >Delete
       </router-link>
       <router-link
         :to="`/postedit/${post.id}`"
-        tag="button"
-        class="button"
-        :style="{background: '#09A8C7'}"
+        class="float-right success-btn"
         >Edit
       </router-link>
-      <h3>
-        {{post.userName}}
-      </h3>
+      <div class="font-bold text-lg">
+        {{ post.userName }}
+      </div>
       <router-link :to="`/postview/${post.id}`">
-        <h4>{{post.title}}</h4>
+        <div class="font-bold text-base underline text-blue-600">
+          {{ post.title }}
+        </div>
       </router-link>
-      <p>{{post.body}}</p>
+      <div class="font-medium">{{ post.body }}</div>
     </div>
   </div>
 </template>
@@ -45,7 +49,7 @@ export default {
     ...mapGetters(["posts_data", "loading_status"]),
   },
 
-  mounted: function () {
+  mounted: function() {
     this.getPosts();
   },
 };

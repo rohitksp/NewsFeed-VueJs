@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h3>Add New Post</h3>
-    <hr />
+    <div class="header">
+      Add New Post
+    </div>
     <form @submit.prevent="createPost()">
       <label for="user-name" class="label">UserName:</label><br />
       <input
@@ -36,7 +37,7 @@
         required
       />
       <br />
-      <button class="submit-btn" type="submit">Add Post</button>
+      <button class="primary-btn mt-2" type="submit">Add Post</button>
       <HomeButton />
     </form>
   </div>
@@ -52,7 +53,7 @@ export default {
     HomeButton,
   },
 
-  data: function () {
+  data: function() {
     return {
       postData: {
         userName: "",

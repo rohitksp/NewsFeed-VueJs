@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h3>Edit the Post</h3>
-    <hr />
+    <div class="header">Edit The Post</div>
     <form @submit.prevent="updatePost()">
-      <label for="user-name" class="label">UserName</label><br />
+      <label for="user-name" class="label">UserName:</label><br />
       <input
         type="text"
+        placeholder="Edit the user name"
         v-model="postData.userName"
         id="user-name"
         class="input-box"
@@ -13,7 +13,7 @@
         required
       />
       <br />
-      <label for="title" class="label">Title</label><br />
+      <label for="title" class="label">Title:</label><br />
       <input
         type="text"
         placeholder="Edit the title"
@@ -24,7 +24,7 @@
         required
       />
       <br />
-      <label for="description" class="label">Description</label><br />
+      <label for="description" class="label">Description:</label><br />
       <input
         type="text"
         placeholder="Edit the description"
@@ -35,7 +35,9 @@
         required
       />
       <br />
-      <button class="update-btn" type="submit">Update</button>
+      <button class="warning-btn mt-2" type="submit">
+        Update
+      </button>
       <HomeButton />
     </form>
   </div>

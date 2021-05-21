@@ -1,8 +1,10 @@
 <template>
   <div>
-    <h1>Oops! 404 Page not found.</h1>
+    <div class="text-3xl font-bold mb-2">Oops! 404 Page not found.</div>
     <router-link to="/">
-      <h3>Go back to home page</h3>
+      <div class="text-xl font-semibold underline text-blue-800">
+        Go back to home page
+      </div>
     </router-link>
   </div>
 </template>
