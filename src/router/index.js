@@ -6,6 +6,8 @@ import PostEdit from '../components/posts/PostEdit.vue'
 import PostDelete from '../components/posts/PostDelete.vue'
 import PostView from '../components/posts/PostView.vue'
 import NotFound from '../components/NotFound.vue'
+import Login from '../components/Login.vue'
+import Register from '../components/Register.vue'
 
 Vue.use(VueRouter)
 
@@ -14,6 +16,16 @@ const routes = [
     path: '/',
     name: 'home',
     component: PostList
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: Register
   },
   {
     path: '*',

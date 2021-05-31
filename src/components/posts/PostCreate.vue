@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="form-style">
     <div class="header">
       Add New Post
     </div>
     <form @submit.prevent="createPost()">
-      <label for="user-name" class="label">UserName:</label><br />
+      <label for="user-name" class="label">UserName:</label>
       <input
         type="text"
         id="user-name"
@@ -14,8 +14,7 @@
         class="input-box"
         required
       />
-      <br />
-      <label for="title" class="label">Title:</label><br />
+      <label for="title" class="label">Title:</label>
       <input
         type="text"
         id="title"
@@ -25,8 +24,7 @@
         class="input-box"
         required
       />
-      <br />
-      <label for="description" class="label">Description:</label><br />
+      <label for="description" class="label">Description:</label>
       <input
         type="text"
         id="description"
@@ -36,7 +34,6 @@
         class="input-box"
         required
       />
-      <br />
       <button class="primary-btn mt-2" type="submit">Add Post</button>
       <HomeButton />
     </form>
@@ -45,7 +42,6 @@
 
 <script>
 import HomeButton from "../HomeButton.vue";
-import { mapActions } from "vuex";
 
 export default {
   name: "PostCreate",
@@ -59,19 +55,22 @@ export default {
         userName: "",
         title: "",
         body: "",
+        userId: this.$store.getters.get_userId,
       },
     };
   },
   methods: {
-    ...mapActions(["addPost", "getPosts"]),
     createPost() {
-      this.addPost({
+      this.$store.dispatch("addPost", {
         body: this.postData.body,
         title: this.postData.title,
         userName: this.postData.userName,
+        userId: this.postData.userId,
       });
-      this.getPosts();
-      this.postData = "";
+      this.$store.dispatch("getPosts");
+      this.postData.userName = "";
+      this.postData.title = "";
+      this.postData.body = "";
       this.$router.push("/");
     },
   },

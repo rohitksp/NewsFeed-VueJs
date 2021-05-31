@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div class="form-style">
     <div class="header">View Post</div>
-    <div class="bg-white rounded-lg hover:bg-gray-300 p-2 my-2">
+    <div class="bg-blue-200 rounded-lg p-2 my-2">
       <div class="font-bold text-lg">{{ this.postData.userName }}</div>
       <div class="font-semibold text-base">{{ this.postData.title }}</div>
       <div class="font-medium">{{ this.postData.body }}</div>
     </div>
     <div
-      class="bg-white flex rounded-lg p-2 my-2"
+      class="bg-gray-100 flex rounded-lg p-2 my-2"
       v-for="(comment, index) in commentData"
       :key="index"
     >
@@ -23,8 +23,8 @@
         <div class="font-normal">{{ comment.message }}</div>
       </div>
     </div>
-    <form @submit.prevent="submitComment()">
-      <label for="name" class="label">Author</label><br />
+    <form @submit.prevent="addComments()">
+      <label for="name" class="label">Author</label>
       <input
         type="text"
         id="name"
@@ -33,8 +33,8 @@
         v-model="postComment.author"
         class="input-box"
         required
-      /><br />
-      <label for="comment" class="label">Comment</label><br />
+      />
+      <label for="comment" class="label">Comment</label>
       <input
         type="text"
         id="comment"
@@ -43,17 +43,17 @@
         v-model="postComment.message"
         class="input-box"
         required
-      /><br />
+      />
       <button class="primary-btn mt-2" type="submit">Comment</button>
       <HomeButton />
     </form>
-    <h3 v-if="loading_status">Loading...</h3>
+    <h3 v-if="getters.loading_status">Loading...</h3>
   </div>
 </template>
 
 <script>
 import HomeButton from "../HomeButton";
-import { mapActions, mapGetters } from "vuex";
+import Swal from "sweetalert2";
 
 export default {
   name: "PostView",
@@ -64,6 +64,7 @@ export default {
 
   data: function() {
     return {
+      getters: this.$store.getters,
       postComment: {
         postId: this.id,
         author: "",
@@ -73,14 +74,12 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getComments", "getPosts", "addComment"]),
-
     avatarUrl(comment) {
       return "https://joeschmoe.io/api/v1/" + comment.author;
     },
 
     submitComment() {
-      this.addComment({
+      this.$store.dispatch("addComment", {
         postId: this.id,
         author: this.postComment.author,
         message: this.postComment.message,
@@ -88,21 +87,36 @@ export default {
       this.postComment.author = "";
       this.postComment.message = "";
     },
+    addComments() {
+      if (this.getters.login_status === false) {
+        Swal.fire({
+          icon: "error",
+          title: "OOPS!!",
+          html: "<b>Please login then comment</b>",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$router.push("/login");
+          }
+        });
+      } else {
+        this.submitComment();
+      }
+    },
   },
   computed: {
-    ...mapGetters(["comments_data", "posts_data", "loading_status"]),
-
     postData() {
-      return this.posts_data.find((post) => post.id == this.id);
+      let post_data = this.$store.getters.posts_data;
+      return post_data.find((post) => post.id == this.id);
     },
 
     commentData() {
-      return this.comments_data.filter((comment) => comment.postId == this.id);
+      let comment_data = this.$store.getters.comments_data;
+      return comment_data.filter((comment) => comment.postId == this.id);
     },
   },
   mounted() {
-    this.getComments();
-    this.getPosts();
+    this.$store.dispatch("getComments");
+    this.$store.dispatch("getPosts");
   },
 };
 </script>

@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="form-style">
     <div class="header">Edit The Post</div>
     <form @submit.prevent="updatePost()">
-      <label for="user-name" class="label">UserName:</label><br />
+      <label for="user-name" class="label">UserName:</label>
       <input
         type="text"
         placeholder="Edit the user name"
@@ -12,8 +12,7 @@
         autocomplete="off"
         required
       />
-      <br />
-      <label for="title" class="label">Title:</label><br />
+      <label for="title" class="label">Title:</label>
       <input
         type="text"
         placeholder="Edit the title"
@@ -23,8 +22,7 @@
         autocomplete="off"
         required
       />
-      <br />
-      <label for="description" class="label">Description:</label><br />
+      <label for="description" class="label">Description:</label>
       <input
         type="text"
         placeholder="Edit the description"
@@ -34,7 +32,6 @@
         autocomplete="off"
         required
       />
-      <br />
       <button class="warning-btn mt-2" type="submit">
         Update
       </button>
@@ -45,8 +42,6 @@
 
 <script>
 import HomeButton from "../HomeButton";
-import { mapActions, mapState } from "vuex";
-
 export default {
   name: "PostEdit",
   props: ["id"],
@@ -55,19 +50,16 @@ export default {
   },
 
   methods: {
-    ...mapActions(["editPost", "getPosts"]),
-
     updatePost() {
-      this.editPost(this.postData);
-      this.getPosts();
+      this.$store.dispatch("editPost", this.postData);
+      this.$store.dispatch("getPosts");
       this.$router.push("/");
     },
   },
   computed: {
-    ...mapState(["posts"]),
-
     postData() {
-      return this.posts.find((post) => post.id == this.id);
+      var posts = this.$store.state.posts;
+      return posts.find((post) => post.id == this.id);
     },
   },
 };

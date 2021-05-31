@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="form-style">
     <div class="header">Delete The Post</div>
-    <div class="bg-white rounded-lg p-2 mt-2">
+    <div class="bg-gray-100 rounded-lg p-2 mt-2">
       <div class="label my-2">
         Are you sure you want to delete the post?
       </div>
@@ -14,18 +14,14 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-
 export default {
   name: "PostDelete",
   props: ["id"],
 
   methods: {
-    ...mapActions(["deletePost", "getPosts"]),
-
     deletePostData() {
-      this.deletePost(this.id);
-      this.getPosts();
+      this.$store.dispatch("deletePost", this.id);
+      this.$store.dispatch("getPosts");
       this.$router.push("/");
     },
   },

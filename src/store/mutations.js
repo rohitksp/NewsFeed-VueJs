@@ -19,5 +19,17 @@ export default {
   },
   add_comment: (state, payload) => {
     state.comments.unshift(payload)
+  },
+  get_userInfo: (state, payload) => {
+    state.users = payload
+  },
+  register_user: (state, payload) => {
+    state.users.push(payload)
+  },
+  login_status: (state, payload) => {
+    state.loginStatus = payload
+  },
+  get_userId: (state, payload) => {
+    state.userId = payload
   }
 }

@@ -61,4 +61,28 @@ export default {
         window.alert(error)
       })
   },
+  getUserInfo ({commit}) {
+    postsAPI.get("/users")
+      .then(response => {
+        commit('get_userInfo', response.data)
+      })
+      .catch(error => {
+        window.alert(error)
+      })
+  },
+  registerUser ({commit}, payload) {
+    postsAPI.post("/users", payload)
+      .then(response => {
+        commit('register_user', response.data)
+      })
+      .catch(error => {
+        window.alert(error)
+      })
+  },
+  loginStatus ({commit}, payload) {
+    commit('login_status', payload)
+  },
+  getUserId ({commit}, payload) {
+    commit('get_userId', payload)
+  }
 }

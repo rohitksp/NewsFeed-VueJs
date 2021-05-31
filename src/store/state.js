@@ -1,5 +1,8 @@
 export default {
   posts: [],
   comments: [],
-  loadingStatus: false
+  loadingStatus: false,
+  users: [],
+  loginStatus: false,
+  userId: []
 }

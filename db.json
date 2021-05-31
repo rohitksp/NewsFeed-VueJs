@@ -4,13 +4,15 @@
       "userName": "John",
       "title": "qui est esse",
       "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla",
-      "id": 2
+      "id": 2,
+      "userId": 1
     },
     {
       "userName": "Sam",
       "title": "ea molestias quasi exercitationem repellat qui ipsa sit aut",
       "body": "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut",
-      "id": 3
+      "id": 3,
+      "userId": 1
     },
     {
       "id": 4,
@@ -20,18 +22,21 @@
     },
     {
       "id": 5,
+      "userId": 1,
       "userName": "Vijay",
       "title": "nesciunt quas odio",
       "body": "repudiandae veniam quaerat sunt sed\nalias aut fugiat sit autem sed est\nvoluptatem omnis possimus esse voluptatibus quis\nest aut tenetur dolor neque"
     },
     {
       "id": 6,
+      "userId": 1,
       "userName": "Rohan",
       "title": "dolorem eum magni eos aperiam quiasdfafasd",
       "body": "ut aspernatur corporis harum nihil quis provident sequi\nmollitia nobis aliquid molestiae\nperspiciatis et ea nemo ab reprehenderit accusantium quas\nvoluptate dolores velit et doloremque molestiae"
     },
     {
       "id": 7,
+      "userId": 3,
       "userName": "Sen",
       "title": "magnam facilis autem",
       "body": "dolore placeat quibusdam ea quo vitae\nmagni quis enim qui quis quo nemo aut saepe\nquidem repellat excepturi ut quia\nsunt ut sequi eos ea sed quas"
@@ -40,19 +45,22 @@
       "userName": "Ronny",
       "title": "dolorem dolore edst ipsam",
       "body": "dignissimos aperiam dolorem qui eum\nfacilis quibusdam animi sint suscipit qui sint possimus cum\nquaerat magni maiores excepturi\nipsam ut commodi dolor voluptatum modi aut vitae",
-      "id": 8
+      "id": 8,
+      "userId": 4
     },
     {
       "userName": "Tony",
       "title": "nesciunt omnis dolorem tempora et accusantium",
-      "body": "consectetur animi nesciunt iure dolore\nenim quia ad\nveniam autem ut quam aut nobis\net est aut quod aut provident voluptas autem voluptas",
-      "id": 9
+      "body": "consectetur animi nesciunt iure doloreenim quia adveniam autem ut quam aut nobiset est aut quod aut provident voluptas autem voluptas",
+      "id": 9,
+      "userId": 4
     },
     {
       "userName": "Rohit",
       "title": "Today's News.",
       "body": "Government announced lockdown in delhi from 10 pm to 5 am",
-      "id": 10
+      "id": 10,
+      "userId": 2
     }
   ],
   "comments": [
@@ -78,7 +86,63 @@
       "postId": "10",
       "author": "Rohan",
       "message": "Very bad news",
+      "id": 7
+    },
+    {
+      "postId": "9",
+      "author": "Raman",
+      "message": "Nice",
+      "id": 8
+    },
+    {
+      "postId": "9",
+      "author": "Rohan",
+      "message": "good line",
       "id": 9
+    },
+    {
+      "postId": "8",
+      "author": "Rohan",
+      "message": "Good Post",
+      "id": 10
+    }
+  ],
+  "users": [
+    {
+      "userName": "Aman",
+      "email": "aman@gmail.com",
+      "password": "aman123",
+      "id": 1
+    },
+    {
+      "userName": "Rohan",
+      "email": "rohan@gmail.com",
+      "password": "rohan123",
+      "id": 2
+    },
+    {
+      "userName": "Shubham",
+      "email": "shubham@gmail.com",
+      "password": "shubham123",
+      "id": 3
+    },
+    {
+      "userName": "Rohit",
+      "email": "rohit@gmail.com",
+      "password": "rohit@123",
+      "id": 4
+    },
+    {
+      "userName": "Raman",
+      "email": "raman@gmail.com",
+      "password": "raman123",
+      "id": 5
+    },
+    {
+      "userName": "Teena",
+      "email": "teena@gmail.com",
+      "password": "teena@123",
+      "id": 6
     }
   ]
 }
