@@ -55,7 +55,7 @@ export default {
         userName: "",
         title: "",
         body: "",
-        userId: this.$store.getters.get_userId,
+        // userId: this.$store.getters.get_userId,
       },
     };
   },
@@ -65,7 +65,7 @@ export default {
         body: this.postData.body,
         title: this.postData.title,
         userName: this.postData.userName,
-        userId: this.postData.userId,
+        // userId: this.postData.userId,
       });
       this.$store.dispatch("getPosts");
       this.postData.userName = "";
