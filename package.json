@@ -10,14 +10,14 @@
     "start": "concurrently \"npm run serve\" \"npm run json-server\""
   },
   "dependencies": {
-    "@tailwindcss/postcss7-compat": "^2.0.2",
+    "@tailwindcss/postcss7-compat": "^2.2.7",
     "autoprefixer": "^9",
     "axios": "^0.21.1",
     "concurrently": "^6.0.0",
     "core-js": "^3.6.5",
     "es6-promise": "^4.2.8",
     "json-server": "^0.16.3",
-    "postcss": "^7",
+    "postcss": "^7.0.36",
     "sweetalert2": "^10.16.6",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
     "vue": "^2.6.11",
