@@ -53,14 +53,14 @@ export default {
     updatePost() {
       this.$store.dispatch("editPost", this.postData);
       this.$store.dispatch("getPosts");
-      this.$router.push("/");
+      // this.$router.push("/");
     },
   },
   computed: {
-    postData() {
-      var posts = this.$store.state.posts;
-      return posts.find((post) => post.id == this.id);
-    },
+    // postData() {
+    //   var posts = this.$store.state.posts;
+    //   return posts.find((post) => post.id == this.id);
+    // },
   },
 };
 </script>

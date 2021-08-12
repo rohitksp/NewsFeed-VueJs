@@ -1,9 +1,9 @@
 import { shallowMount } from "@vue/test-utils";
-import PostCreate from "@/components/posts/PostCreate.vue";
+import NotFound from "@/components/NotFound.vue";
 
-describe("PostCreate.vue", () => {
+describe("NotFound.vue", () => {
   it("Checking error message", () => {
-    const wrapper = shallowMount(PostCreate);
-    expect(wrapper.find(".error").exists()).toBe(true);
+    const wrapper = shallowMount(NotFound);
+    expect(wrapper.find(".error").text()).toEqual("Oops! 404 Page not found.");
   });
 });
