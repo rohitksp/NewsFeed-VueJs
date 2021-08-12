@@ -61,6 +61,13 @@
       "body": "Government announced lockdown in delhi from 10 pm to 5 am",
       "id": 10,
       "userId": 2
+    },
+    {
+      "body": "Lockdown period has been ended",
+      "title": "Good News",
+      "userName": "Rohit",
+      "userId": 7,
+      "id": 11
     }
   ],
   "comments": [
@@ -143,6 +150,12 @@
       "email": "teena@gmail.com",
       "password": "teena@123",
       "id": 6
+    },
+    {
+      "userName": "rohitksp",
+      "email": "rohit124@gmail.com",
+      "password": "rohit123",
+      "id": 7
     }
   ]
 }
