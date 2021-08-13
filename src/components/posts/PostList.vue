@@ -12,7 +12,7 @@
           >Register</router-link
         >
       </div>
-      <div class="text-3xl float-left font-bold text-green-700">
+      <div id="mainHeader" class="text-3xl float-left font-bold text-green-700">
         NewsFeed
       </div>
       <button @click="createPost()" class="ml-2 primary-btn">

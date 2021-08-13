@@ -22,7 +22,7 @@ export default {
     deletePostData() {
       this.$store.dispatch("deletePost", this.id);
       this.$store.dispatch("getPosts");
-      // this.$router.push("/");
+      this.$router.push("/");
     },
   },
 };

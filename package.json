@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
+    "test:unit": "NODE_ENV=test vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "json-server": "json-server --watch db.json --port 3002",
     "start": "concurrently \"npm run serve\" \"npm run json-server\""
