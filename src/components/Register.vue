@@ -35,7 +35,9 @@
         />
         <br />
         <button class="primary-btn mt-2" type="submit">Register</button>
-        <button @click="homeBtn()" id="danger" class="danger-btn ml-1">Home</button>
+        <button @click="homeBtn()" id="danger" class="danger-btn ml-1">
+          Home
+        </button>
       </form>
     </div>
   </div>
@@ -84,7 +86,7 @@ export default {
     },
     homeBtn() {
       this.$store.dispatch("loginStatus", false);
-      // this.$router.push("/");
+      this.$router.push("/");
     },
   },
   mounted() {

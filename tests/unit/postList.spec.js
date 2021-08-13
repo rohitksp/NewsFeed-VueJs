@@ -1,33 +1,36 @@
-// import { shallowMount, createLocalVue } from "@vue/test-utils";
-// import VueRouter from "vue-router";
-// import Vuex from "vuex";
-// import PostList from "@/components/posts/PostList.vue";
+import { shallowMount, createLocalVue } from "@vue/test-utils";
+import Vuex from "vuex";
+import VueRouter from "vue-router";
+import PostList from "@/components/posts/PostList.vue";
 
-// const localVue = createLocalVue();
+const localVue = createLocalVue();
 
-// localVue.use(VueRouter);
-// localVue.use(Vuex);
+localVue.use(VueRouter);
 
-// describe("PostList.vue", () => {
-//   let actions;
-//   let store;
+localVue.use(Vuex);
 
-//   beforeEach(() => {
-//     actions = {
-      
-//     };
-//     store = new Vuex.Store({
-//       actions,
-//     });
-//   });
+describe("PostList.vue", () => {
+  let actions;
+  let store;
 
-//   it("Checking header name", () => {
-//     const wrapper = shallowMount(PostList, {
-//       stubs: ["router-link", "router-view"],
-//     });
-//   });
-//   it("Checking the button", () => {
-//     const wrapper = shallowMount(PostList, { localVue, store });
-   
-//   });
-// });
+  beforeEach(() => {
+    actions = {
+      addComment: jest.fn(),
+      getUserId: jest.fn(),
+      getPosts: jest.fn(),
+    };
+    store = new Vuex.Store({
+      actions,
+    });
+  });
+
+  it("Checking header name", () => {
+    const wrapper = shallowMount(PostList, {
+      stubs: ["router-link", "router-view"],
+      localVue,
+      store,
+    });
+    const idTag = wrapper.find("#mainHeader");
+    expect(idTag.text()).toEqual("NewsFeed");
+  });
+});

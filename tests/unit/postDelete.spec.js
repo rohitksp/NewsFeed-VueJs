@@ -2,15 +2,20 @@ import { shallowMount, createLocalVue } from "@vue/test-utils";
 import VueRouter from "vue-router";
 import Vuex from "vuex";
 import PostDelete from "@/components/posts/PostDelete.vue";
+import PostList from "@/components/posts/PostList.vue";
 
 const localVue = createLocalVue();
-
-localVue.use(VueRouter);
 localVue.use(Vuex);
+
+const routes = [
+  { path: "/", component: PostList },
+  { path: "/postdelete", component: PostDelete },
+];
 
 describe("PostDelete.vue", () => {
   let actions;
   let store;
+  let router;
 
   beforeEach(() => {
     actions = {
@@ -20,11 +25,32 @@ describe("PostDelete.vue", () => {
     store = new Vuex.Store({
       actions,
     });
+    router = new VueRouter({
+      routes,
+    });
   });
 
-  it("Checking header name", () => {
+  it("Checking router in the component", () => {
     const wrapper = shallowMount(PostDelete, {
-      stubs: ["router-link", "router-view"],
+      localVue,
+      store,
+      router,
+      mocks: {
+        $route: { path: "/postdelete" },
+      },
+    });
+    expect(wrapper.vm.$route.path).toBe("/postdelete");
+    expect(wrapper.vm.$route).toBeInstanceOf(Object);
+  });
+
+  it("Checking header in the register file", () => {
+    const wrapper = shallowMount(PostDelete, {
+      localVue,
+      store,
+      router,
+      mocks: {
+        $route: { path: "/postdelete" },
+      },
     });
     expect(wrapper.find(".header").text()).toEqual("Delete The Post");
   });

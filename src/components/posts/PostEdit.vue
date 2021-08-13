@@ -54,10 +54,10 @@ export default {
     },
   },
   computed: {
-    // postData() {
-    //   var posts = this.$store.getters.posts_data;
-    //   return posts.find((post) => post.id == this.id);
-    // },
+    postData() {
+      var posts = this.$store.getters.posts_data;
+      return posts.find((post) => post.id == this.id);
+    },
   },
 };
 </script>
