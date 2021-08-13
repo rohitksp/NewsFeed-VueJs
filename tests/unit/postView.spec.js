@@ -12,13 +12,23 @@ describe("PostView.vue", () => {
 
   beforeEach(() => {
     getters = {
-      posts_data: () => ({
-        userName: "John",
-        title: "qui est esse",
-        body: "est rerum tempore vitae\nsequi sint nihil",
-        id: 2,
-        userId: 1,
-      }),
+      posts_data: () => [
+        {
+          userName: "John",
+          title: "qui est esse",
+          body: "est rerum tempore vitae\nsequi sint nihil",
+          id: 2,
+          userId: 1,
+        },
+      ],
+      comments_data: () => [
+        {
+          id: 1,
+          postId: "10",
+          author: "Rohit",
+          message: "Bad news",
+        },
+      ],
     };
     actions = {
       loginStatus: jest.fn(),
@@ -33,6 +43,9 @@ describe("PostView.vue", () => {
 
   it("Checking header name", () => {
     const wrapper = shallowMount(PostView, {
+      propsData: {
+        id: 2,
+      },
       localVue,
       store,
     });

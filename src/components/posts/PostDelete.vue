@@ -20,7 +20,7 @@ export default {
 
   methods: {
     deletePostData() {
-      if (this.store) {
+      if (this.$store) {
         this.$store.dispatch("deletePost", this.id);
         this.$store.dispatch("getPosts");
       }
