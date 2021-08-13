@@ -20,9 +20,13 @@ export default {
 
   methods: {
     deletePostData() {
-      this.$store.dispatch("deletePost", this.id);
-      this.$store.dispatch("getPosts");
-      this.$router.push("/");
+      if (this.store) {
+        this.$store.dispatch("deletePost", this.id);
+        this.$store.dispatch("getPosts");
+      }
+      if (this.$router) {
+        this.$router.push("/");
+      }
     },
   },
 };
