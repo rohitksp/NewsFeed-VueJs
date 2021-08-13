@@ -8,8 +8,6 @@ const localVue = createLocalVue();
 localVue.use(VueRouter);
 localVue.use(Vuex);
 
-const router = new VueRouter();
-
 describe("PostDelete.vue", () => {
   let actions;
   let store;
@@ -25,7 +23,9 @@ describe("PostDelete.vue", () => {
   });
 
   it("Checking header name", () => {
-    const wrapper = shallowMount(PostDelete, { localVue, router });
+    const wrapper = shallowMount(PostDelete, {
+      stubs: ["router-link", "router-view"],
+    });
     expect(wrapper.find(".header").text()).toEqual("Delete The Post");
   });
   it("Checking the button", () => {

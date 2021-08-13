@@ -7,27 +7,28 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 
 describe("PostEdit.vue", () => {
-  let state;
+  let getters;
   let store;
 
   beforeEach(() => {
-    state = {
-      body: "Lockdown period has been ended",
-      title: "Good News",
-      userName: "Rohit",
-      userId: 7,
-      id: 11,
+    getters = {
+      posts_data: () => "Rohit",
     };
     store = new Vuex.Store({
-      state,
+      getters,
     });
   });
 
   const wrapper = shallowMount(PostEdit, { localVue, store });
+  it("Checking header of the edit file", () => {
+    const classTag = wrapper.find(".header");
+    expect(classTag.text()).toEqual("Edit The Post");
+  });
   // const userName = "Rohit";
   // const title = "Today's Weather";
   // const description = "Very good weather today in delhi";
-  it("Checking value with the vuex state", () => {
-    expect(wrapper.find("#user-name").element.value).toEqual(state.userName);
-  });
+  // it("Checking value with the vuex state", () => {
+  //   const id = wrapper.find("#user-name");
+  //   expect(id.element.value).toBe(getters.posts_data());
+  // });
 });
