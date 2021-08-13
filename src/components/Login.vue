@@ -77,8 +77,12 @@ export default {
       }
     },
     homeBtn() {
-      this.$store.dispatch("loginStatus", false);
-      this.$router.push("/");
+      if (this.$store) {
+        this.$store.dispatch("loginStatus", false);
+      }
+      if (this.$router) {
+        this.$router.push("/");
+      }
     },
   },
   mounted() {
