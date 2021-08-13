@@ -6,7 +6,6 @@
       <input
         type="text"
         placeholder="Edit the user name"
-        v-model="postData.userName"
         id="user-name"
         class="input-box"
         autocomplete="off"
@@ -16,7 +15,6 @@
       <input
         type="text"
         placeholder="Edit the title"
-        v-model="postData.title"
         id="title"
         class="input-box"
         autocomplete="off"
@@ -26,7 +24,6 @@
       <input
         type="text"
         placeholder="Edit the description"
-        v-model="postData.body"
         id="description"
         class="input-box"
         autocomplete="off"
@@ -53,12 +50,12 @@ export default {
     updatePost() {
       this.$store.dispatch("editPost", this.postData);
       this.$store.dispatch("getPosts");
-      // this.$router.push("/");
+      this.$router.push("/");
     },
   },
   computed: {
     // postData() {
-    //   var posts = this.$store.state.posts;
+    //   var posts = this.$store.getters.posts_data;
     //   return posts.find((post) => post.id == this.id);
     // },
   },
