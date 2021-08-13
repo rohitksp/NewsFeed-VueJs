@@ -12,7 +12,13 @@ describe("PostView.vue", () => {
 
   beforeEach(() => {
     getters = {
-      loading_status: () => true,
+      posts_data: () => ({
+        userName: "John",
+        title: "qui est esse",
+        body: "est rerum tempore vitae\nsequi sint nihil",
+        id: 2,
+        userId: 1,
+      }),
     };
     actions = {
       loginStatus: jest.fn(),
