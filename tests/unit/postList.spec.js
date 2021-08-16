@@ -1,11 +1,8 @@
 import { shallowMount, createLocalVue } from "@vue/test-utils";
 import Vuex from "vuex";
-import VueRouter from "vue-router";
 import PostList from "@/components/posts/PostList.vue";
 
 const localVue = createLocalVue();
-
-localVue.use(VueRouter);
 
 localVue.use(Vuex);
 
@@ -26,7 +23,7 @@ describe("PostList.vue", () => {
 
   it("Checking header name", () => {
     const wrapper = shallowMount(PostList, {
-      stubs: ["router-link", "router-view"],
+      stubs: ["router-link"],
       localVue,
       store,
     });

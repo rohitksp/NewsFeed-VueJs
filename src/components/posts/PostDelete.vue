@@ -8,7 +8,9 @@
       <button class="danger-btn" @click.prevent="deletePostData()">
         Yes
       </button>
-      <router-link to="/" class="primary-btn ml-1">No</router-link>
+      <router-link to="/" id="back-button" class="primary-btn ml-1"
+        >No</router-link
+      >
     </div>
   </div>
 </template>
