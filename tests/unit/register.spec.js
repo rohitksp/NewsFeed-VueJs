@@ -1,5 +1,4 @@
 import { shallowMount, createLocalVue } from "@vue/test-utils";
-import VueRouter from "vue-router";
 import Vuex from "vuex";
 import PostList from "@/components/posts/PostList.vue";
 import Register from "@/components/Register.vue";
@@ -7,15 +6,13 @@ import Register from "@/components/Register.vue";
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-const routes = [
-  { path: "/", component: PostList },
-  { path: "/register", component: Register },
-];
+const $router = {
+  push: jest.fn(),
+};
 
 describe("Register.vue", () => {
   let actions;
   let store;
-  let router;
 
   beforeEach(() => {
     actions = {
@@ -25,22 +22,18 @@ describe("Register.vue", () => {
     store = new Vuex.Store({
       actions,
     });
-    router = new VueRouter({
-      routes,
-    });
   });
 
   it("Checking router in the component", () => {
     const wrapper = shallowMount(Register, {
       localVue,
       store,
-      router,
       mocks: {
-        $route: { path: "/register" },
+        $router,
       },
     });
-    expect(wrapper.vm.$route.path).toBe("/register");
-    expect(wrapper.vm.$route).toBeInstanceOf(Object);
+    wrapper.find("#danger").trigger("click");
+    expect($router.push).lastCalledWith("/");
   });
 
   it("Checking header in the register file", () => {
