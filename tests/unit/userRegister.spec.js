@@ -1,17 +1,15 @@
 import { shallowMount, createLocalVue } from "@vue/test-utils";
 import Vuex from "vuex";
 import PostList from "@/components/posts/PostList.vue";
-import Login from "@/components/Login.vue";
-import Swal from "sweetalert2";
+import Register from "@/components/Register.vue";
 
 const $router = {
   push: jest.fn(),
 };
 const localVue = createLocalVue();
-
 localVue.use(Vuex);
 
-describe("PostList.vue and Login.vue", () => {
+describe("PostList.vue and Register.vue", () => {
   let getters;
   let actions;
   let store;
@@ -29,74 +27,57 @@ describe("PostList.vue and Login.vue", () => {
       login_status: () => false,
     };
     actions = {
-      loginStatus: jest.fn(),
-      getUserId: jest.fn(),
-      getPosts: jest.fn(),
       getUserInfo: jest.fn(),
+      getPosts: jest.fn(),
+      registerUser: jest.fn(),
     };
     store = new Vuex.Store({
       actions,
       getters,
     });
-    window.scrollTo = () => {};
   });
-
-  it("Checking the router in this file", () => {
+  it("Checking register button in this file", () => {
     const wrapper = shallowMount(PostList, {
       localVue,
       store,
-      stubs: ["router-link"],
       mocks: {
         $router,
       },
     });
-    wrapper.find(".success-btn").trigger("click");
-    expect($router.push).lastCalledWith("/login");
-  });
-
-  it("Checking the userLogin button", () => {
-    const wrapper = shallowMount(PostList, {
-      localVue,
-      store,
-      stubs: ["router-link"],
-    });
-    wrapper.find(".success-btn").trigger("click");
-    expect(actions.loginStatus).toHaveBeenCalled();
+    wrapper.find("#registerBtn").trigger("click");
+    expect($router.push).lastCalledWith("/register");
   });
 
   it("Checking user input data", () => {
-    const wrapper = shallowMount(Login, {
+    const wrapper = shallowMount(Register, {
       localVue,
       store,
-      data() {
+      data: function() {
         return {
-          userName: "Rohit",
-          password: "rohit@123",
+          userData: {
+            userName: "Rohit",
+            email: "rohit123@gmail.com",
+            password: "rohit@123",
+          },
         };
       },
     });
     const userName = wrapper.find("#userName").element.value;
+    const emailId = wrapper.find("#emailId").element.value;
     const password = wrapper.find("#password").element.value;
     expect(userName).toEqual("Rohit");
+    expect(emailId).toEqual("rohit123@gmail.com");
     expect(password).toEqual("rohit@123");
   });
-
-  it("Checking user form data", () => {
-    const wrapper = shallowMount(Login, {
+  it("Checking user form button", () => {
+    const wrapper = shallowMount(Register, {
       localVue,
       store,
+      mocks: {
+        $router,
+      },
     });
     wrapper.find("form").trigger("submit");
-    return Promise.resolve().then(() => {
-      return Swal.fire({
-        hideClass: false,
-        didOpen: () => {
-          Swal.clickConfirm();
-          setTimeout(() => {
-            expect(actions.loginStatus).toHaveBeenCalled();
-          }, 1000);
-        },
-      });
-    });
+    expect(actions.registerUser).toHaveBeenCalled();
   });
 });

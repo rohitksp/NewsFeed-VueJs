@@ -5,12 +5,14 @@
         <button class="success-btn" @click="userLoginStatus()">
           {{ loginIn() }}
         </button>
-        <router-link
+        <button
+          id="registerBtn"
           class="primary-btn"
           v-if="!getters.login_status"
-          to="/register"
-          >Register</router-link
+          @click="goToRegister"
         >
+          Register
+        </button>
       </div>
       <div id="mainHeader" class="text-3xl float-left font-bold text-green-700">
         NewsFeed
@@ -71,6 +73,9 @@ export default {
       } else {
         return "Logout";
       }
+    },
+    goToRegister() {
+      this.$router.push("/register");
     },
     userLoginStatus() {
       if (this.getters.login_status === false) {
