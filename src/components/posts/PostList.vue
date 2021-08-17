@@ -74,8 +74,12 @@ export default {
     },
     userLoginStatus() {
       if (this.getters.login_status === false) {
-        this.$router.push("/login");
-        this.$store.dispatch("loginStatus", true);
+        if (this.$router) {
+          this.$router.push("/login");
+        }
+        if (this.$store) {
+          this.$store.dispatch("loginStatus", true);
+        }
       } else {
         Swal.fire({
           icon: "success",
