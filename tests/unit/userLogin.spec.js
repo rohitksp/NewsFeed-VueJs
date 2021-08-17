@@ -86,15 +86,17 @@ describe("PostList.vue", () => {
       localVue,
       store,
     });
+    wrapper.find("form").trigger("submit");
     return Promise.resolve().then(() => {
       return Swal.fire({
         hideClass: false,
         didOpen: () => {
           Swal.clickConfirm();
+          setTimeout(() => {
+            expect(actions.loginStatus).toHaveBeenCalled();
+          }, 1000);
         },
       });
-      wrapper.find("form").trigger("submit");
-      expect(actions.loginStatus).toHaveBeenCalled();
     });
   });
 });
