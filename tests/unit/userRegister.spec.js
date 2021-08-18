@@ -69,6 +69,10 @@ describe("PostList.vue and Register.vue", () => {
     expect(password).toEqual("rohit@123");
   });
   it("Checking user form button", () => {
+    // In the third test, I am checking the form button if the user submit the form here also defined
+    // "localvue" store first I found the button and then checked their function I added getters which
+    //  are “get_userData” in the test file because in the function it is using then I added actions
+    //  which are “registerUser” in the test because in the function it is using.
     const wrapper = shallowMount(Register, {
       localVue,
       store,

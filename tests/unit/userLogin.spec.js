@@ -52,6 +52,10 @@ describe("PostList.vue and Login.vue", () => {
   });
 
   it("Checking the userLogin button", () => {
+    // In the second test, I checked the user login button, for this test I added getters and
+    // actions first I have added “localvue” for store initializing then I found the button and
+    // then check their function, I added getters “login_status” because it is using in the function
+    // and then lastly I have added actions “loginStatus” because it is also using in the function.
     const wrapper = shallowMount(PostList, {
       localVue,
       store,
@@ -78,6 +82,13 @@ describe("PostList.vue and Login.vue", () => {
   });
 
   it("Checking user form data", () => {
+    //  In the test, I tested the form data first I found the button and then checked their
+    // function I have initialized the getter's value in the test file which is “get_userData” because
+    // it is using in the function I have used "swalalert" in my app so I have used promises and
+    // then I have used "hideClass" to hide all the contents like title icon, etc. and then opening
+    // for swal alert I used “didOpen” and then for clicking the confirm button I used
+    // “Swal.clickConfirm()” and it was not working suddenly so I used here setTimeout function and
+    // then inside the setTimeout it's checked the last thing in the function.
     const wrapper = shallowMount(Login, {
       localVue,
       store,
