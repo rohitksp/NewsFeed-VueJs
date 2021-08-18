@@ -60,17 +60,21 @@ export default {
   },
   methods: {
     createPost() {
-      this.$store.dispatch("addPost", {
-        body: this.postData.body,
-        title: this.postData.title,
-        userName: this.postData.userName,
-        userId: this.$store.getters.get_userId,
-      });
+      if (this.$store) {
+        this.$store.dispatch("addPost", {
+          body: this.postData.body,
+          title: this.postData.title,
+          userName: this.postData.userName,
+          userId: this.$store.getters.get_userId,
+        });
+      }
       this.$store.dispatch("getPosts");
       this.postData.userName = "";
       this.postData.title = "";
       this.postData.body = "";
-      this.$router.push("/");
+      if (this.$router) {
+        this.$router.push("/");
+      }
     },
   },
 };

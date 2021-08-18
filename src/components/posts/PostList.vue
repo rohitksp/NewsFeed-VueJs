@@ -17,7 +17,7 @@
       <div id="mainHeader" class="text-3xl float-left font-bold text-green-700">
         NewsFeed
       </div>
-      <button @click="createPost()" class="ml-2 primary-btn">
+      <button @click="createPost()" id="addPost" class="ml-2 primary-btn">
         Add Post
       </button>
     </div>
@@ -33,11 +33,14 @@
       :key="index"
     >
       <div v-if="loggedIn(post)">
-        <router-link
-          :to="`/postdelete/${post.id}`"
+        <button
+          id="deleteBtn"
           class="float-right danger-btn"
-          >Delete
-        </router-link>
+          @click="goToDelete(post)"
+        >
+          Delete
+        </button>
+        <!-- <router-link :to="`/postdelete/${post.id}`"> </router-link> -->
         <router-link
           :to="`/postedit/${post.id}`"
           class="float-right success-btn"
@@ -73,6 +76,9 @@ export default {
       } else {
         return "Logout";
       }
+    },
+    goToDelete(post) {
+      this.$router.push(`/postdelete/${post.id}`);
     },
     goToRegister() {
       this.$router.push("/register");

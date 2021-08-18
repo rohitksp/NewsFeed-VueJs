@@ -24,12 +24,11 @@ describe("PostList.vue and Register.vue", () => {
           id: 1,
         },
       ],
-      login_status: () => false,
     };
     actions = {
       getUserInfo: jest.fn(),
-      getPosts: jest.fn(),
       registerUser: jest.fn(),
+      getPosts: jest.fn(),
     };
     store = new Vuex.Store({
       actions,
@@ -73,9 +72,6 @@ describe("PostList.vue and Register.vue", () => {
     const wrapper = shallowMount(Register, {
       localVue,
       store,
-      mocks: {
-        $router,
-      },
     });
     wrapper.find("form").trigger("submit");
     expect(actions.registerUser).toHaveBeenCalled();

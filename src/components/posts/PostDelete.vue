@@ -5,7 +5,7 @@
       <div class="label my-2">
         Are you sure you want to delete the post?
       </div>
-      <button class="danger-btn" @click.prevent="deletePostData()">
+      <button class="danger-btn" @click="deletePostData()">
         Yes
       </button>
       <router-link to="/" id="back-button" class="primary-btn ml-1"
