@@ -31,7 +31,6 @@ describe("PostView.vue", () => {
       ],
     };
     actions = {
-      loginStatus: jest.fn(),
       getComments: jest.fn(),
       getPosts: jest.fn(),
     };

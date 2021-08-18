@@ -1,6 +1,5 @@
 import { shallowMount, createLocalVue } from "@vue/test-utils";
 import Vuex from "vuex";
-import PostList from "@/components/posts/PostList.vue";
 import Register from "@/components/Register.vue";
 
 const localVue = createLocalVue();
