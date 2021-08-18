@@ -8,7 +8,6 @@ const $router = {
   push: jest.fn(),
 };
 const localVue = createLocalVue();
-
 localVue.use(Vuex);
 
 describe("PostList.vue and Login.vue", () => {
@@ -30,7 +29,6 @@ describe("PostList.vue and Login.vue", () => {
     };
     actions = {
       loginStatus: jest.fn(),
-      getUserId: jest.fn(),
       getPosts: jest.fn(),
       getUserInfo: jest.fn(),
     };
@@ -41,11 +39,10 @@ describe("PostList.vue and Login.vue", () => {
     window.scrollTo = () => {};
   });
 
-  it("Checking the router in this file", () => {
+  it("Checking register button in this file", () => {
     const wrapper = shallowMount(PostList, {
       localVue,
       store,
-      stubs: ["router-link"],
       mocks: {
         $router,
       },
@@ -58,7 +55,6 @@ describe("PostList.vue and Login.vue", () => {
     const wrapper = shallowMount(PostList, {
       localVue,
       store,
-      stubs: ["router-link"],
     });
     wrapper.find(".success-btn").trigger("click");
     expect(actions.loginStatus).toHaveBeenCalled();
