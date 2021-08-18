@@ -3,7 +3,6 @@ import Vuex from "vuex";
 import PostList from "@/components/posts/PostList.vue";
 
 const localVue = createLocalVue();
-
 localVue.use(Vuex);
 
 describe("PostList.vue", () => {
@@ -12,8 +11,6 @@ describe("PostList.vue", () => {
 
   beforeEach(() => {
     actions = {
-      addComment: jest.fn(),
-      getUserId: jest.fn(),
       getPosts: jest.fn(),
     };
     store = new Vuex.Store({
@@ -23,7 +20,6 @@ describe("PostList.vue", () => {
 
   it("Checking header name", () => {
     const wrapper = shallowMount(PostList, {
-      stubs: ["router-link"],
       localVue,
       store,
     });

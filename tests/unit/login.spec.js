@@ -22,18 +22,6 @@ describe("Login.vue", () => {
     });
   });
 
-  it("Checking back button is working properly", () => {
-    const wrapper = shallowMount(Login, {
-      localVue,
-      store,
-      mocks: {
-        $router,
-      },
-    });
-    wrapper.find("#danger").trigger("click");
-    expect($router.push).lastCalledWith("/");
-  });
-
   it("Checking home button", () => {
     const wrapper = shallowMount(Login, {
       localVue,
